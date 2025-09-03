@@ -2,7 +2,7 @@
 
 A whimsical, in-browser API testing tool for developers who enjoy debugging with a sense of humor. The **404 Funhouse** provides a straightforward interface to send API requests, inspect responses, and run quick-and-dirty tests directly in your browser. No fuss, just fun.
 
-!(https://placehold.co/1200x600/f3f4f6/1f2937?text=404+Funhouse+UI)
+Visit The Website: [404 Funhouse](https://abdullahaljubayer-101.github.io/404-funhouse/)
 
 ## Features
 
@@ -19,7 +19,7 @@ A whimsical, in-browser API testing tool for developers who enjoy debugging with
 
 The **404 Funhouse** is a single HTML file, which makes it incredibly simple to use and host.
 
-1.  **Open the Tool:** Just visit the website at: [GitHub Base URL](https://github.com/your-username/your-repo){:target="_blank"}
+1.  **Open the Tool:** Just visit the website at: [404 Funhouse](https://abdullahaljubayer-101.github.io/404-funhouse/)
 2.  **Enter Your Request:**
     * Select your HTTP method from the dropdown.
     * Type or paste the API URL.
