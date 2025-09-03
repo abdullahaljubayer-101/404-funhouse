@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern API Tester</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="bg-gray-100 flex flex-col items-center min-h-screen p-4">
+    <!-- Main Container -->
+    <div
+      class="container bg-white rounded-xl shadow-2xl overflow-hidden p-6 md:p-10 transition-all duration-300 ease-in-out flex flex-col h-full min-h-screen"
+    >
+      <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">
+        API Tester
+      </h1>
+      <p class="text-center text-gray-600 mb-8">
+        A minimalist tool for sending and testing API requests.
+      </p>
+
+      <!-- URL and Method Input -->
+      <div class="flex flex-col md:flex-row items-stretch gap-4 mb-6">
+        <select
+          id="method"
+          class="w-full md:w-1/4 p-3 bg-gray-200 rounded-lg text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+        >
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+        <input
+          type="text"
+          id="url"
+          placeholder="Enter API URL (e.g., http://localhost:3000/users)"
+          class="w-full md:w-3/4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+        />
+        <button
+          id="send-btn"
+          class="w-full md:w-auto p-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+        >
+          <i class="fas fa-play"></i>
+          <span>Send</span>
+        </button>
+      </div>
+
+      <!-- Three-container layout -->
+      <!-- Added min-w-0 to the flex items below to prevent them from pushing other columns off-screen -->
+      <div class="flex flex-col md:flex-row gap-4 flex-1">
+        <!-- Container 1: Headers & Request Body -->
+        <div class="flex-1 flex flex-col space-y-4 min-w-0">
+          <div
+            class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex-grow"
+          >
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-semibold text-gray-800">Headers</h2>
+              <button
+                id="add-header-btn"
+                class="text-blue-500 hover:text-blue-700 transition-colors duration-200 font-semibold text-sm"
+              >
+                <i class="fas fa-plus mr-1"></i> Add Header
+              </button>
+            </div>
+            <div id="headers-container" class="space-y-3">
+              <div class="flex gap-2 items-center">
+                <input
+                  type="text"
+                  value="Authorization"
+                  readonly
+                  class="w-1/3 p-2 bg-gray-200 rounded-md text-gray-600 cursor-not-allowed"
+                />
+                <input
+                  type="text"
+                  id="auth-token"
+                  placeholder="Bearer your-jwt-token"
+                  class="w-2/3 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+                />
+                <button
+                  onclick="removeHeader(this)"
+                  class="text-gray-400 hover:text-red-500 transition-colors duration-200 hidden"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex-grow"
+          >
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">
+              Request Body
+            </h2>
+            <textarea
+              id="body-textarea"
+              placeholder='Enter JSON body here (e.g., {"username": "testuser", "password": "password"})'
+              rows="8"
+              class="bg-[#21252b] w-full p-3 border border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Container 2: Response Section -->
+        <div
+          class="flex-1 flex flex-col bg-white p-4 rounded-xl border border-gray-200 shadow-inner min-w-0"
+        >
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Response</h2>
+          <div class="flex items-center space-x-4 mb-4 text-sm font-medium">
+            <span id="status-code" class="text-gray-500">Status: N/A</span>
+            <span id="response-time" class="text-gray-500">Time: N/A</span>
+          </div>
+          <div
+            id="response-body-container"
+            class="json-response flex-grow min-h-[200px]"
+          >
+            <pre id="response-body">Click "Send" to get a response.</pre>
+          </div>
+        </div>
+
+        <!-- Container 3: Test Assertions & Results -->
+        <div
+          class="flex-1 flex flex-col bg-gray-50 p-4 rounded-xl border border-gray-200 min-w-0"
+        >
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            Test Assertions
+          </h2>
+          <div class="space-y-3 mb-4">
+            <!-- Status Code Test -->
+            <label
+              class="flex items-center space-x-2 text-gray-700 font-medium"
+            >
+              <input
+                type="checkbox"
+                id="test-status-code"
+                class="form-checkbox text-blue-500 rounded focus:ring-blue-500"
+              />
+              <span>Test Status Code</span>
+              <input
+                type="number"
+                id="expected-status-code"
+                placeholder="200"
+                class="w-20 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400 text-right text-sm"
+              />
+            </label>
+
+            <!-- Expected Output Test -->
+            <label
+              class="flex items-center space-x-2 text-gray-700 font-medium"
+            >
+              <input
+                type="checkbox"
+                id="test-expected-output"
+                class="form-checkbox text-blue-500 rounded focus:ring-blue-500"
+              />
+              <span>Test Expected Output</span>
+            </label>
+            <div class="bg-gray-100 rounded-md p-2">
+              <textarea
+                id="expected-output-textarea"
+                placeholder="Enter expected JSON output here"
+                rows="4"
+                class="w-full bg-gray-100 p-2 rounded-md font-mono text-sm focus:outline-none resize-none border border-gray-200"
+              ></textarea>
+            </div>
+
+            <!-- Array Size Test -->
+            <label
+              class="flex items-center space-x-2 text-gray-700 font-medium"
+            >
+              <input
+                type="checkbox"
+                id="test-array-size"
+                class="form-checkbox text-blue-500 rounded focus:ring-blue-500"
+              />
+              <span>Test Array Size</span>
+              <input
+                type="number"
+                id="expected-array-size"
+                placeholder="0"
+                class="w-20 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400 text-right text-sm"
+              />
+            </label>
+          </div>
+          <button
+            id="run-tests-btn"
+            class="w-full p-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+          >
+            <i class="fas fa-flask"></i>
+            <span>Run Tests</span>
+          </button>
+          <div
+            class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300 test-results flex-grow"
+          >
+            <h3 class="font-semibold text-gray-800 mb-2">Results</h3>
+            <ul id="test-results-list" class="space-y-1"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message Box -->
+    <div
+      id="message-box"
+      class="fixed inset-x-0 top-0 mt-4 mx-auto p-4 rounded-lg shadow-lg text-white font-medium text-center z-50 transition-transform transform -translate-y-full opacity-0"
+      style="
+        max-width: 400px;
+        backdrop-filter: blur(8px);
+        background-color: rgba(0, 0, 0, 0.7);
+      "
+    >
+      <p id="message-text"></p>
+      <button
+        id="close-message-btn"
+        class="absolute top-1 right-2 text-sm text-gray-300 hover:text-white"
+      >
+        &times;
+      </button>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

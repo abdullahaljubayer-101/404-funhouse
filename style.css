@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* JSON Editor Styling */
+.json-editor {
+  font-family: "Fira Code", monospace;
+  background-color: #21252b;
+  color: #abb2bf;
+  border-radius: 0.5rem;
+  min-height: 200px;
+  overflow: auto;
+  padding: 1rem;
+  white-space: pre; /* Changed to 'pre' to prevent wrapping */
+  line-height: 1.5;
+}
+.json-key {
+  color: #56b6c2;
+}
+.json-string {
+  color: #98c379;
+}
+.json-number {
+  color: #d19a66;
+}
+.json-boolean,
+.json-null {
+  color: #c678dd;
+}
+.json-punctuation {
+  color: #abb2bf;
+}
+.json-response {
+  font-family: "Fira Code", monospace;
+  background-color: #21252b;
+  color: #abb2bf;
+  border-radius: 0.5rem;
+  overflow: auto; /* Handles both horizontal and vertical scrolling */
+  padding: 1rem;
+  white-space: pre; /* Changed to 'pre' for horizontal scrolling */
+  line-height: 1.5;
+}
+
+/* Custom scrollbar for dark areas */
+.json-editor::-webkit-scrollbar,
+.json-response::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.json-editor::-webkit-scrollbar-track,
+.json-response::-webkit-scrollbar-track {
+  background: #282c34;
+}
+.json-editor::-webkit-scrollbar-thumb,
+.json-response::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 20px;
+  border: 2px solid #282c34;
+}
+
+.test-results {
+  max-height: 200px;
+  overflow-y: auto;
+}
