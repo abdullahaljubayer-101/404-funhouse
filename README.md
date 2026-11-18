@@ -1,36 +1,62 @@
-# 404 Funhouse
+# 🎪 404 Funhouse
 
-A whimsical, in-browser API testing tool for developers who enjoy debugging with a sense of humor. The **404 Funhouse** provides a straightforward interface to send API requests, inspect responses, and run quick-and-dirty tests directly in your browser. No fuss, just fun.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-222?style=flat-square&logo=github)
 
-Visit The Website: [404 Funhouse](https://abdullahaljubayer-101.github.io/404-funhouse/)
+A lightweight **API testing tool that runs right in your browser**. Send a request, look at the response and run a few quick checks, all without installing anything or creating an account. 🧪
 
-## Features
+I built it for those moments when I just want to poke an endpoint quickly and opening a full API client feels like too much.
 
-* **HTTP Method Support:** Easily select from `GET`, `POST`, `PUT`, and `DELETE` methods.
-* **Custom Headers & Body:** Add any number of custom headers, including Authorization tokens. For `POST` and `PUT` requests, a dedicated panel allows for entering a JSON body.
-* **Real-time Response Display:** Get immediate feedback with a color-coded JSON viewer. The viewer is designed to handle very long responses with both horizontal and vertical scrolling, ensuring the UI remains clean and functional.
-* **Quick Assertions:** Built-in test cases allow you to check:
-    * The HTTP status code.
-    * Whether the response body matches an expected JSON output.
-    * The size of a top-level array in the response.
-* **Intuitive UI:** The three-panel layout keeps everything you need in one view, from request parameters to test results.
+🌐 **Try it:** [abdullahaljubayer-101.github.io/404-funhouse](https://abdullahaljubayer-101.github.io/404-funhouse/)
 
-## How to Use
+---
 
-The **404 Funhouse** is a single HTML file, which makes it incredibly simple to use and host.
+## ✨ Features
 
-1.  **Open the Tool:** Just visit the website at: [404 Funhouse](https://abdullahaljubayer-101.github.io/404-funhouse/)
-2.  **Enter Your Request:**
-    * Select your HTTP method from the dropdown.
-    * Type or paste the API URL.
-    * Add any required headers (e.g., `Authorization: Bearer <your-token>`) and a JSON request body if needed.
-3.  **Send & View:**
-    * Click the **Send** button. The response will appear in the middle panel, along with the status code and response time.
-4.  **Run Tests:**
-    * In the right-hand panel, check the box next to the tests you want to run.
-    * Fill in the expected values (e.g., `200` for a status code, or a full JSON object).
-    * Click **Run Tests** to see the results.
+- 🔀 **HTTP methods**: `GET`, `POST`, `PUT` and `DELETE`
+- 🧾 **Custom headers**: add as many as you need, including `Authorization` tokens
+- 📦 **JSON body** editor for `POST` and `PUT` requests
+- 🎨 **Color-coded JSON viewer** that scrolls nicely, even for very long responses
+- ⏱️ **Status code and response time** shown for every request
+- ✅ **Quick tests**:
+  - Check the HTTP status code
+  - Check if the response matches an expected JSON
+  - Check the size of a top-level array
+- 🧩 Clean **three-panel layout**: request → response → tests
 
-## Contributing
+## 🚀 How to use
 
-The **404 Funhouse** is a simple project. If you have an idea for a feature or a bug fix, feel free to open an issue or submit a pull request!
+1. Open the [live site](https://abdullahaljubayer-101.github.io/404-funhouse/).
+2. Pick a method and paste your API URL.
+3. Add headers and a JSON body if you need them.
+4. Hit **Send** and check the response in the middle panel.
+5. In the right panel, tick the tests you want, fill in the expected values and click **Run Tests**.
+
+> 💡 Requests are sent straight from your browser, so the API you're calling needs to allow CORS.
+
+## 💻 Run it locally
+
+It's just static files, so there's nothing to install:
+
+```bash
+git clone https://github.com/abdullahaljubayer-101/404-funhouse.git
+cd 404-funhouse
+open index.html   # or double-click it
+```
+
+## 🛠️ Built with
+
+- HTML, CSS and vanilla JavaScript
+- Tailwind CSS (CDN)
+- Font Awesome icons
+- Fetch API + `performance.now()` for timing
+
+## 🤝 Contributing
+
+Got an idea or found a bug? Feel free to open an issue or a pull request. 🙌
+
+---
+
+Made by **Abdullah Al Jubayer** · [GitHub](https://github.com/abdullahaljubayer-101) · [Portfolio](https://abdullahaljubayer.com)
